@@ -104,9 +104,7 @@ Chip8Tests >> test10to0Loop [
 Chip8Tests >> testAllKeysOnOff [
 
 	| keyboard |
-	
 	keyboard := chip keyboard.
-	
 	keyboard quertyMapping do: [ :char |
 		keyboard keyDown: char	
 	].
@@ -365,11 +363,9 @@ Chip8Tests >> testBitOpXor [
 Chip8Tests >> testInstruction1nnn [
 
 	chip doOpcode: 16r1FEF.
-	
 	self assert: chip programCounter equals: 16r0FEF.
 	
-	chip doOpcode: 16r1F00.
-		
+	chip doOpcode: 16r1F00.	
 	self assert: chip programCounter equals: 16r0F00 
 ]
 
@@ -382,30 +378,27 @@ Chip8Tests >> testInstruction2nnn [
 	
 	self 
 		assert: chip programCounter equals: 16r0FEF;
-		assert: chip stack size = 1. 
+		assert: chip stack size equals: 1. 
 	
 	chip doOpcode: 16r2F00.
 		
 	self 
 		assert: chip programCounter equals: 16r0F00; 
-		assert: chip stack size = 2. 
+		assert: chip stack size equals: 2. 
 ]
 
 { #category : #tests }
 Chip8Tests >> testInstruction3nnn [
 
 	| pc |
-
 	pc := chip programCounter.
 
 	chip 
 		doOpcode: 16r6101;
 		doOpcode: 16r3101.
-	
 	self assertProgramCounterEquals: pc + 2 + 4.
 	
-	chip doOpcode: 16r3100.
-	
+	chip doOpcode: 16r3100.	
 	self assertProgramCounterEquals: pc + 6 + 2
 ]
 
@@ -413,17 +406,14 @@ Chip8Tests >> testInstruction3nnn [
 Chip8Tests >> testInstruction4nnn [
 
 	| pc |
-
 	pc := chip programCounter.
 
 	chip 
 		doOpcode: 16r6101;
-		doOpcode: 16r4101.
-	
+		doOpcode: 16r4101.	
 	self assertProgramCounterEquals: pc + 2 + 2.
 	
 	chip doOpcode: 16r4100.
-	
 	self assertProgramCounterEquals: pc + 4 + 4
 ]
 
@@ -431,20 +421,17 @@ Chip8Tests >> testInstruction4nnn [
 Chip8Tests >> testInstruction5nnn [
 
 	| pc |
-
 	pc := chip programCounter.
 
 	chip 
 		doOpcode: 16r6101;
 		doOpcode: 16r6202;
-		doOpcode: 16r5120.
-	
+		doOpcode: 16r5120.	
 	self assertProgramCounterEquals: pc + 4 + 2.
 	
 	chip 
 		doOpcode: 16r6101;
 		doOpcode: 16r5120.
-	
 	self assertProgramCounterEquals: pc + 6 + 4
 ]
 
@@ -472,17 +459,12 @@ Chip8Tests >> testInstruction7nnn [
 Chip8Tests >> testInstruction9xy0 [
 
 	| pc |
-
 	chip doOpcode: 16r6101.
-	
 	pc := chip programCounter.
-	
 	chip doOpcode: 16r9100.
-	
 	self assert: pc + 4 equals: chip programCounter.
 	
 	chip doOpcode: 16r9110.
-	
 	self assert: pc + 4 + 2 equals: chip programCounter.
 ]
 
@@ -490,11 +472,9 @@ Chip8Tests >> testInstruction9xy0 [
 Chip8Tests >> testInstructionAnnn [
 
 	chip doOpcode: 16rA123.
-	
 	self assert: chip memoryPointer equals: 16r0123.
 
 	chip doOpcode: 16rA321.
-
 	self assert: chip memoryPointer equals: 16r0321.
 		
 
@@ -504,16 +484,13 @@ Chip8Tests >> testInstructionAnnn [
 Chip8Tests >> testInstructionBnnn [
 
 	self assertDataRegisterAt: 1 equals: 0.
-	
 	chip doOpcode: 16rB123.
-	
 	self assert: chip programCounter equals: 16r0123.
-
+	
 	chip dataRegister at: 1 put: 12.
 	self assert: (chip dataRegister at: 1) equals: 12.
 	
 	chip doOpcode: 16rB123.
-
 	self assert: chip programCounter equals: 16r0123 + 12.
 		
 
@@ -536,29 +513,21 @@ Chip8Tests >> testInstructionCxnn [
 Chip8Tests >> testInstructionEx9E [
 
 	| pc |
-	
 	pc := chip programCounter.
-	
 	chip doOpcode: 16rE09E.
-	
 	self assert: pc + 2 equals: chip programCounter.
 	
 	chip setKeyboardStateTo: 16rFF.
-	
 	pc := chip programCounter.
-	
 	chip doOpcode: 16rE09E.
 	
 	self assert: pc + 4 equals: chip programCounter.
-	
 	chip 
 		doOpcode: 16r6201;
 		setKeyboardStateTo: 16r01.
 	
 	pc := chip programCounter.
-	
 	chip doOpcode: 16rE29E.
-	
 	self assert: pc + 2 equals: chip programCounter.
 ]
 
@@ -566,19 +535,14 @@ Chip8Tests >> testInstructionEx9E [
 Chip8Tests >> testInstructionExA1 [
 
 	| pc |
-	
 	pc := chip programCounter.
-	
 	chip doOpcode: 16rE0A1.
-	
 	self assert: pc + 4 equals: chip programCounter.
 	
 	chip setKeyboardStateTo: 16rFF.
 	
 	pc := chip programCounter.
-	
 	chip doOpcode: 16rE0A1.
-	
 	self assert: pc + 2 equals: chip programCounter.
 	
 	chip 
@@ -586,9 +550,7 @@ Chip8Tests >> testInstructionExA1 [
 		setKeyboardStateTo: 16r01.
 	
 	pc := chip programCounter.
-	
 	chip doOpcode: 16rE2A1.
-	
 	self assert: pc + 4 equals: chip programCounter.
 ]
 
@@ -603,22 +565,12 @@ Chip8Tests >> testInstructionFx07 [
 ]
 
 { #category : #'tests - Fxyn' }
-Chip8Tests >> testInstructionFx0A [
-	
-	self flag: #todo
-	
-	
-]
-
-{ #category : #'tests - Fxyn' }
 Chip8Tests >> testInstructionFx15 [
 	
 	self assert: chip delayTimer equals: 0.
-	
 	chip 
 		doOpcode: 16r610A;
 		doOpcode: 16rF115.
-		
 	self assert: chip delayTimer equals: (16rA)
 ]
 
@@ -626,11 +578,9 @@ Chip8Tests >> testInstructionFx15 [
 Chip8Tests >> testInstructionFx18 [
 	
 	self assert: chip soundTimer equals: 0.
-	
 	chip 
 		doOpcode: 16r610A;
 		doOpcode: 16rF118.
-		
 	self assert: chip soundTimer equals: (16rA)
 ]
 

@@ -7,11 +7,6 @@ Class {
 	#category : #'Chip8-Testing'
 }
 
-{ #category : #initialization }
-C8EmulatorForTests >> _loadFontSet [ 
-	super loadFontSet
-]
-
 { #category : #accessing }
 C8EmulatorForTests >> dataRegister [ 
 	^ dataRegister
