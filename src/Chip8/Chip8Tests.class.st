@@ -169,16 +169,12 @@ Chip8Tests >> testBitOpAdd [
 Chip8Tests >> testBitOpAnd [
 
 	chip doOpcode: 16r6F0F.
-
 	self assertDataRegisterAt: 16rF equals: 16r0F.
-
 	chip doOpcode: 16r80F2.
-		
 	self 
 		assert: chip opcodeX equals: 0;
 		assert: chip opcodeY equals: 15;
-		assert: chip registerX equals: 2r0000.
-		
+		assert: chip registerX equals: 2r0000.	
 	chip 
 		doOpcode: 16r6A07; "set reg[A] to 7"
 		doOpcode: 16r6B0B; "set reg[B] to 11"
@@ -191,21 +187,16 @@ Chip8Tests >> testBitOpAnd [
 Chip8Tests >> testBitOpOr [
 
 	chip doOpcode: 16r6F0F.
-
 	self assertDataRegisterAt: 16rF equals: 16r0F.
-
 	chip doOpcode: 16r80F1.
-		
 	self 
 		assert: chip opcodeX equals: 0;
 		assert: chip opcodeY equals: 15;
 		assert: chip registerX equals: 2r1111.
-		
 	chip 
 		doOpcode: 16r6A03; "set reg[A] to 3"
 		doOpcode: 16r6B08; "set reg[B] to 8"
 		doOpcode: 16r8AB1. "reg[A] | reg [B]"
-
 	self assert: chip registerX equals: 2r1011.
 ]
 

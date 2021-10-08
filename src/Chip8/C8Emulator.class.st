@@ -19,7 +19,7 @@ Class {
 		'dataRegister',
 		'keyboard'
 	],
-	#category : #'Chip8-Tag'
+	#category : #'Chip8-Core'
 }
 
 { #category : #morphic }
@@ -514,7 +514,7 @@ C8Emulator >> playSound [
 { #category : #emulation }
 C8Emulator >> rand [
 
-	^ random nextInt: 16rFF
+	^ random nextInteger: 16rFF
 ]
 
 { #category : #register }

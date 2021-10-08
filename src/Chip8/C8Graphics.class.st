@@ -12,7 +12,7 @@ Class {
 		'redraw',
 		'collision'
 	],
-	#category : #'Chip8-Tag'
+	#category : #'Chip8-Core'
 }
 
 { #category : #converting }

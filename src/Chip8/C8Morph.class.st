@@ -106,11 +106,9 @@ C8Morph >> handlesMouseDown: event [
 C8Morph >> initialize [
 
 	super initialize.
-	
 	colorMap := Bitmap new: 2.
 	running := false. 
 	ips := 1.
-	
 	self grayAndBlack
 ]
 
@@ -122,7 +120,7 @@ C8Morph >> instructionsPerStep: aNumber [
 
 { #category : #'event handling' }
 C8Morph >> keyDown: anEvent [
-	
+
 	chip keyboard keyDown: anEvent keyCharacter asLowercase 
 ]
 

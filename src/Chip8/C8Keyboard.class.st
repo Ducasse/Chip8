@@ -9,7 +9,7 @@ Class {
 		'state',
 		'keymap'
 	],
-	#category : #'Chip8-Tag'
+	#category : #'Chip8-Core'
 }
 
 { #category : #'event handling' }
@@ -28,7 +28,6 @@ C8Keyboard >> defaultKeyMapping [
 C8Keyboard >> initialize [
 
 	super initialize.
-	
 	state := 0.
 	keymap := self defaultKeyMapping
 ]
@@ -44,7 +43,6 @@ C8Keyboard >> isKeyDownAt: anIndex [
 C8Keyboard >> keyDown: aCharacter [
 	
 	| keyIndex |
-	
 	keyIndex := keymap indexOf: aCharacter ifAbsent: [ ^ self ].
 	state := state bitAt: keyIndex put: 1
 ]
@@ -53,7 +51,6 @@ C8Keyboard >> keyDown: aCharacter [
 C8Keyboard >> keyUp: aCharacter [
 	
 	| keyIndex |
-		
 	keyIndex := keymap indexOf: aCharacter ifAbsent: [ ^ self ].
 	state := state bitAt: keyIndex put: 0
 ]

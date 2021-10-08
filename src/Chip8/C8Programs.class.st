@@ -9,12 +9,13 @@ Class {
 	#classVars : [
 		'Repository'
 	],
-	#category : #'Chip8-Tag'
+	#category : #'Chip8-Core'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 C8Programs class >> downloadGamesPackZophar [
-
+	"self downloadGamesPackZophar"
+	
 	| link contentStream zip buffer |
 	
 	link := 'http://www.zophar.net/download_file/11688'.
@@ -42,7 +43,6 @@ C8Programs class >> programNamed: aString [
 C8Programs class >> repository [
 
 	Repository ifNil: [ Repository := Dictionary new ].
-	
 	^ Repository 
 	
 ]

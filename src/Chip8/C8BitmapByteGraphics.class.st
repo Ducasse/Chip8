@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'bitmap'
 	],
-	#category : #'Chip8-Tag'
+	#category : #'Chip8-Core'
 }
 
 { #category : #converting }
@@ -22,13 +22,11 @@ C8BitmapByteGraphics >> asForm [
 C8BitmapByteGraphics >> byteAt: byteIndex xorDraw: aByte [
 
 	| currentByte xorByte |
-	
 	byteIndex > 256 ifTrue: [ ^ self ].
 	currentByte := bitmap byteAt: byteIndex.
 	xorByte := currentByte bitXor: aByte.
 	
 	bitmap byteAt: byteIndex put: xorByte.
-	
 	collision ifTrue: [ ^ self ].	
 	collision := (currentByte bitAnd: xorByte) > 0.
 ]
@@ -59,7 +57,6 @@ C8BitmapByteGraphics >> drawByte: aByte at: aPosition [
 C8BitmapByteGraphics >> drawSplitByte: aByte at: aPosition [
 
 	| byteIndex shift |
-	
 	byteIndex := self byteIndexFor: aPosition.
 	shift := (aPosition x % 8).
 	
@@ -74,7 +71,6 @@ C8BitmapByteGraphics >> drawSplitByte: aByte at: aPosition [
 C8BitmapByteGraphics >> initialize [
 
 	super initialize.
-	
 	bitmap := Bitmap new: 64 withAll: 0.
 
 ]

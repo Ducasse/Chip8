@@ -14,10 +14,8 @@ Class {
 C8Builder class >> build: aBlock [
 
 	| builder |
-	
 	builder := self new.
 	aBlock value: builder.
-	
 	^ builder stream contents
 ]
 
@@ -38,7 +36,7 @@ C8Builder >> addToMemPtr: xIndex [
 	stream uint16: 16rF01E + (xIndex << 8)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #instructions }
 C8Builder >> call: aNumber [ 
 
 	| real |
@@ -49,7 +47,8 @@ C8Builder >> call: aNumber [
 ]
 
 { #category : #instructions }
-C8Builder >> goto: aNumber [ 
+C8Builder >> goto: aNumber [
+
 	| real |
 	real := (aNumber * 2) + 16r200.
 	real > 16rFFF ifTrue: [ self error ].
@@ -61,7 +60,6 @@ C8Builder >> goto: aNumber [
 C8Builder >> initialize [
 
 	super initialize.
-	
 	stream := #[] writeStream.
 ]
 
@@ -73,7 +71,7 @@ C8Builder >> regDump: xIndex [
 	stream uint16: 16rF055 + (xIndex << 8)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #register }
 C8Builder >> regX: aNumber equals: anotherNumber [
 
 	(aNumber between: 0 and: 15) ifFalse: [ self error ].
@@ -84,7 +82,7 @@ C8Builder >> regX: aNumber equals: anotherNumber [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #register }
 C8Builder >> regX: xIndex equalsRegY: yIndex [
 
 	(xIndex between: 0 and: 15) ifFalse: [ self error ].
@@ -95,7 +93,7 @@ C8Builder >> regX: xIndex equalsRegY: yIndex [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #register }
 C8Builder >> regX: aNumber notEqual: anotherNumber [
 
 	(aNumber between: 0 and: 15) ifFalse: [ self error ].
@@ -136,7 +134,7 @@ C8Builder >> stream [
 	^ stream
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #register }
 C8Builder >> subRegY: xIndex fromRegX: yIndex [
 
 	(xIndex between: 0 and: 15) ifFalse: [ self error ].
